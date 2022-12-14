@@ -4,11 +4,12 @@
 
     "version": "2.7.1", 
     "url": "https://github.com/yuru7/HackGen/releases/download/v2.7.1/HackGen_NF_v2.7.1.zip",
+    "hash": "3c1949682567f8b4d4984c30b1439f051f2062a3138ddbf2262c12d087f60d92",
 
     "extract_dir": "HackGen_NF_v2.7.1",
     "installer": {
         "script": [
-            "Get-ChildItem $dir\\OTF -filter '*.otf' | ForEach-Object {",
+            "Get-ChildItem $dir -filter '*.ttf' | ForEach-Object {",
             "   $fontdir = \"$env:LocalAppData\\Microsoft\\Windows\\Fonts\"",
             "   New-ItemProperty -Path 'HKCU:\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Fonts' -Name $_.Name.Replace($_.Extension, ' (TrueType)') -Value \"$fontdir\\$($_.Name)\" -Force | Out-Null",
             "   Copy-Item $_.Fullname -destination \"$fontdir\"",
@@ -17,7 +18,7 @@
     },
     "uninstaller": {
         "script": [
-            "Get-ChildItem $dir\\OTF -filter '*.otf' | ForEach-Object {",
+            "Get-ChildItem $dir -filter '*.ttf' | ForEach-Object {",
             "   $fontdir = \"$env:LocalAppData\\Microsoft\\Windows\\Fonts\"",
             "   Remove-ItemProperty -Path 'HKCU:\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Fonts' -Name $_.Name.Replace($_.Extension, ' (TrueType)') -Force -ErrorAction SilentlyContinue",
             "   Remove-Item \"$fontdir\\$($_.Name)\" -Force -ErrorAction SilentlyContinue",
